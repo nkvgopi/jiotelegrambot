@@ -1,0 +1,20 @@
+[Unit]
+Description=Self-Destructing Media Downloader Telegram service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tsdmd
+Group=tsdmd
+WorkingDirectory=/opt/tsdmd
+EnvironmentFile=/etc/tsdmd.env
+ExecStart=/opt/tsdmd/venv/bin/python /opt/tsdmd/TSDMD.py
+Restart=always
+RestartSec=10
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
+
